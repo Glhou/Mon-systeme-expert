@@ -15,5 +15,5 @@ Pour ajouter une base de fait il suffit d'ajouter un fichier un fait par ligne �
 Les fichiers faits et faits sont des exemples.
 
 ### Utiliser une BDF avec le Chainage avant
-Une fois le projet lancé vous pouvez choisir quel base de fait utiliser puis vous pouvez clicker sur Chainage Avant pour obtenir le résultat dans la liste à coté.
+Une fois le projet lancé vous pouvez choisir quel base de fait utiliser puis vous pouvez clicker sur Chainage Avant pour obtenir le résultat dans la liste à coté. Un fichier comprenant le nom de votre fichier avec "_result" sera créé avec les résultats du chainage avant. Vous pourrez rétablir la liste d'origine en cliquant sur "Reset"
 

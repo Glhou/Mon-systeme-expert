@@ -77,6 +77,14 @@ public class MI {
         return false;
     }
 
+    public BDF getBFaits() {
+        return BFaits;
+    }
+
+    public BDR getBRegles() {
+        return BRegles;
+    }
+
     @Override
     public String toString() {
         return "MI{" +

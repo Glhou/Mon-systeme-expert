@@ -71,7 +71,7 @@ public class BDF {
     public void MAJFichier(){
         FileWriter fw;
         try{
-            fw = new FileWriter(nomFichier);
+            fw = new FileWriter(nomFichier+"_result");
             for(int i=0;i<taille;i++){
                 fw.write(contenu.get(i) + "\n");
             }

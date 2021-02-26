@@ -4,15 +4,23 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+//TODO choix de la base de fait
+//TODO chainage avant
+//TODO affichage dynamique des faits déduits
+//TODO lien de l'input avec le but
+//TODO chainage arrière
+
 public class Window extends JFrame {
 
     private String but;
-    private String[] baseDeFaits;
-    private String[] faits;
-    private Object[][] data;
+    private MI mi;
+    private BDF bdf;
+    private BDR bdr;
+    private String nomBDR;
+    private String[] nomsBDF;
 
 
-    public Window(String s){
+    public Window(String s,String nomBDR,String[] nomsBDF){
         super(s);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1200,800);
@@ -21,15 +29,31 @@ public class Window extends JFrame {
         chainageAvantButton();
         chainageArriereButton();
         textFieldDroite();
-        baseDeFaits = new String[] {"Java in python","Java for dumies","Java for Breakfast"};
-        baseDeFaitsComboBox(baseDeFaits);
-        faits = new String[] {"Il mange le java","Il vit le java","Il adore le java","Il dort le java"};
-        faitsDeduitsList(faits);
-        faits[3] = "Il dors le java"; // test qui prouve qu'on a juste à modifier la data qu'on entre et ça modifie dans l'affichage ce qui est top
-        data = new Object[][] {{"John","Vic",2}};
-        String[] header = new String[] {"Nom","Prenom","Age"};
+        mi = new MI(nomBDR,nomsBDF[0]);
+        bdf = mi.getBFaits();
+        bdr = mi.getBRegles();
+
+        baseDeFaitsComboBox(nomsBDF);
+        faitsDeduitsList(bdf.getContenu().toArray());
+
+        String[][] data = buildData(bdr);
+        String[] header = bdr.getContenu().get(0).getSchema();
+
         table(data,header);
         setVisible(true);
+    }
+
+
+    private String[][] buildData(BDR bdr){
+        int n = bdr.getTaille();
+        int m = bdr.getContenu().get(0).getValeurs().length;
+        String[][] data = new String[n][m];
+        for (int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                data[i][j] = bdr.getContenu().get(i).getValeurs()[j];
+            }
+        }
+        return data;
     }
 
     private void quitButton(){
@@ -95,9 +119,9 @@ public class Window extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Object selected = bdfcb.getSelectedItem();
+                bdf = new BDF(selected.toString());
+                faitsDeduitsList(bdf.getContenu().toArray());
                 System.out.println("selected item = " + selected);
-                String command = e.getActionCommand();
-                System.out.println(command);
             }
         });
         getContentPane().add(bdfcb);
@@ -110,7 +134,7 @@ public class Window extends JFrame {
 
         JList faitsDList = new JList(data);
         JScrollPane faitsDListScroll = new JScrollPane((faitsDList));
-        faitsDListScroll.setBounds(700,100,200,50);
+        faitsDListScroll.setBounds(700,100,200,100);
         getContentPane().add(faitsDListScroll);
     }
 

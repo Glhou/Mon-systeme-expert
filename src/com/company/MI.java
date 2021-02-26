@@ -77,6 +77,10 @@ public class MI {
         return false;
     }
 
+    public void setBFaits(BDF BFaits) {
+        this.BFaits = BFaits;
+    }
+
     public BDF getBFaits() {
         return BFaits;
     }

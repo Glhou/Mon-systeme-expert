@@ -29,9 +29,11 @@ public class StreamDeRegles {
         } catch (Exception e) {
             System.out.println("Erreur de lecture avec : " + e);
         }
-        String[] tab1;
-        tab1 = ss.split(";");
-        regle = new Regle(tab1);
+        String[] tab1 = new String[] {};
+        if (!(ss==null)) {
+            tab1 = ss.split(";");
+            regle = new Regle(tab1);
+        }
     }
 
     public Regle getRegleSuivante(){
